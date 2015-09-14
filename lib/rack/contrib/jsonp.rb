@@ -37,6 +37,10 @@ module Rack
 
       status, headers, response = @app.call(env)
 
+      if STATUS_WITH_NO_ENTITY_BODY.include?(status)
+        return status, headers, response
+      end
+
       headers = HeaderHash.new(headers)
       
       if is_json?(headers) && has_callback?(request)
@@ -65,7 +69,7 @@ module Rack
     end
     
     def has_callback?(request)
-      request.params.include?('callback') and not request.params['callback'].empty?
+      request.params.include?('callback') and not request.params['callback'].to_s.empty?
     end
 
     # See:

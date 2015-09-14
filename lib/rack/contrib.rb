@@ -1,9 +1,10 @@
 require 'rack'
+require 'git-version-bump'
 
 module Rack
   module Contrib
     def self.release
-      "1.2.0"
+      GVB.version
     end
   end
 
@@ -13,10 +14,12 @@ module Rack
   autoload :Cookies,                    "rack/contrib/cookies"
   autoload :CSSHTTPRequest,             "rack/contrib/csshttprequest"
   autoload :Deflect,                    "rack/contrib/deflect"
+  autoload :EnforceValidEncoding,       "rack/contrib/enforce_valid_encoding"
   autoload :ExpectationCascade,         "rack/contrib/expectation_cascade"
   autoload :HostMeta,                   "rack/contrib/host_meta"
   autoload :GarbageCollector,           "rack/contrib/garbagecollector"
   autoload :JSONP,                      "rack/contrib/jsonp"
+  autoload :LazyConditionalGet,         "rack/contrib/lazy_conditional_get"
   autoload :LighttpdScriptNameFix,      "rack/contrib/lighttpd_script_name_fix"
   autoload :Locale,                     "rack/contrib/locale"
   autoload :MailExceptions,             "rack/contrib/mailexceptions"

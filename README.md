@@ -14,6 +14,7 @@ interface:
 * `Rack::Evil` - Lets the rack application return a response to the client from any place.
 * `Rack::HostMeta` - Configures `/host-meta` using a block
 * `Rack::JSONP` - Adds JSON-P support by stripping out the callback param and padding the response with the appropriate callback format.
+* `Rack::LazyConditionalGet` - Caches a global `Last-Modified` date and updates it each time there is a request that is not `GET` or `HEAD`.
 * `Rack::LighttpdScriptNameFix` - Fixes how lighttpd sets the `SCRIPT_NAME` and `PATH_INFO` variables in certain configurations.
 * `Rack::Locale` - Detects the client locale using the Accept-Language request header and sets a `rack.locale` variable in the environment.
 * `Rack::MailExceptions` - Rescues exceptions raised from the app and sends a useful email with the exception, stacktrace, and contents of the environment.
@@ -76,6 +77,18 @@ To run a specific component's tests run
 This works on ruby 1.8.7 but has problems under ruby 1.9.x. 
 
 TODO: instructions for 1.9.x and include bundler
+
+### Criteria for inclusion
+The criteria for middleware being included in this project are roughly as follows:
+* For patterns that are very common, provide a reference implementation so that other projects do not have to reinvent the wheel.
+* For patterns that are very useful or interesting, provide a well-done implementation.
+* The middleware fits in 1 code file and is relatively small. Currently all middleware in the project are < 150 LOC.
+* The middleware doesn't have any dependencies other than rack and the ruby standard library.
+
+These criteria were introduced several years after the start of the project, so some of the included middleware may not meet all of them. In particular, several middleware have external dependencies. It is possible that in some future release of rack-contrib, middleware with external depencies will be removed from the project.
+
+When submitting code keep the above criteria in mind and also see the code
+guidelines in CONTRIBUTING.md. 
 
 ### Links
 
